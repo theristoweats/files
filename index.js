@@ -26,7 +26,7 @@ app.post('/eats/products/upload', (req, res) => {
         console.error(err);
         return res.status(500).send(err);
       }
-      res.json({ fileName: file.name, filePath: `/eats/products/${file.name}` });
+      res.json({ fileName: file.name, filePath: `https://files.theristow.com/eats/products/${file.name}` });
     });
 });
 
