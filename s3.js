@@ -32,7 +32,8 @@ async function getFileStream(fileKey) {
     const downloadParams = {
         Key: fileKey,
         Bucket: bucketName
-    }
+    } 
+    
     try{
         await s3.headObject(downloadParams).promise()
         return s3.getObject(downloadParams).createReadStream()
