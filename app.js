@@ -61,27 +61,27 @@ app.use("/eats/products", express.static("./eats/products"));
 //     stream.pipe(res);
 // })
 
-// app.post('/eats/products/upload', upload.single('image'), async (req, res) => {
-//     // if (req.files === null) {
-//     //   return res.status(400).json({ msg: 'No file uploaded' });
-//     // }
-//     console.log(req.file);
+app.post('/eats/products/upload', upload.single('image'), async (req, res) => {
+    if (req.files === null) {
+      return res.status(400).json({ msg: 'No file uploaded' });
+    }
+    console.log(req.file);
 
-//     const file = req.file;
-//     // ${__dirname}
-//     // file.mv(`./eats/products/${file.name}`, err => {
-//     //   if (err) {
-//     //     console.error(err);
-//     //     return res.status(500).send(err);
-//     //   }
-//     //   res.json({ fileName: file.name, filePath: `https://files.theristow.com/eats/products/${file.name}` });
-//     // });
+    const file = req.file;
+    // ${__dirname}
+    file.mv(`./eats/products/${file.name}`, err => {
+      if (err) {
+        console.error(err);
+        return res.status(500).send(err);
+      }
+      res.json({ fileName: file.name, filePath: `https://files.theristow.com/eats/products/${file.name}` });
+    });
     
-//     const result = await uploadFile(file);
-//     await unlinkFile(file.path);
-//     console.log(result);
-//     res.send({filePath: `https://files.theristow.com/eats/products/${result.Key}`})
-// });
+    // const result = await uploadFile(file);
+    // await unlinkFile(file.path);
+    // console.log(result);
+    // res.send({filePath: `https://files.theristow.com/eats/products/${result.Key}`})
+});
 
 server.listen(process.env.port || 5000, ()=>{
     console.log("Files server is running..."); 
