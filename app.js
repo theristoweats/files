@@ -77,7 +77,7 @@ app.post('/eats/products/upload', (req, res) => {
     });
     
     // const result = await uploadFile(file); 
-    // await unlinkFile(file.path);
+    // await unlinkFile(file.path); 
     // console.log(result);
     // res.send({filePath: `https://files.theristow.com/eats/products/${result.Key}`})
 });
