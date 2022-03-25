@@ -36,7 +36,7 @@ const server = http.createServer(app);
 
 // app.use("/eats/products", express.static("./eats/products"));
 
-app.get('/eats/products/:key', async (req, res) => {
+app.get('/eats/products/:key', (req, res) => {
     // console.log(req.params)
     const key = req.params.key;
     // const readStream = getFileStream(key); 
@@ -44,21 +44,52 @@ app.get('/eats/products/:key', async (req, res) => {
     const downloadParams = {
         Key: key,
         Bucket: bucketName
-    }  
+    }   
+    s3.getObject(downloadParams).createReadStream().on('error', function(err){
+        res.status(502).send("Error, cannot get file!");
+    }).pipe(res);
+    
+    // const stream = s3.getObject(downloadParams).createReadStream() 
+    // stream.pipe(res);  
+
+    // try{
+    //     const stream = s3.getObject(downloadParams).createReadStream() 
+    //     stream.pipe(res);  
+    // }catch(err){
+    //     console.log(err);
+    // }
+    
     // const stream = s3.getObject(downloadParams, function (err, data) {
     //   if (err) {
     //     res.status(200);
     //     res.end('Error Fetching File');
     //   }
     //   else {
+    //     console.log(data);
     //     // res.attachment(req.params.Key); // Set Filename
     //     // res.type(data.ContentType); // Set FileType
-    //     // res.send(data.Body);        // Send File Buffer
-        
+    //     // res.send(data.Body);        // Send File Buffer 
+    //     stream.Body.pipe(res);
     //   }
     // });
-    const stream =  s3.getObject(downloadParams).createReadStream()
-    stream.pipe(res); 
+        // var s3Stream = s3.getObject(downloadParams).createReadStream()
+        //   .on('error', function(err) {  
+        //     // console.log("hii");
+        //     return false;
+        //   })
+        //   .on('end', function(){
+        //     // s3Stream.pipe(res); 
+        //   });  
+      
+
+    // s3.waitFor('objectExists', downloadParams, function(err, data) {
+    //     if (err) return res.send(502).json("Bad request"); // an error occurred
+    //     else{
+
+    //         const stream =  s3.getObject(downloadParams).createReadStream()
+    //         stream.pipe(res); 
+    //     }           // successful response
+    //   });
 }) 
 
 // app.post('/eats/products/upload', (req, res) => {
