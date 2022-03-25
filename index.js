@@ -83,7 +83,7 @@ app.use("/eats/products", express.static("./eats/products"));
 //     res.send({filePath: `https://files.theristow.com/eats/products/${result.Key}`})
 // });
 
-server.listen(process.env.PORT || 5000, ()=>{
+server.listen(process.env.PORT || 8080, ()=>{
     console.log("Files server is running...");
 });
  
