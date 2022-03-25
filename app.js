@@ -59,7 +59,7 @@ app.get('/eats/products/:key', async (req, res) => {
     // });
     const stream =  s3.getObject(downloadParams).createReadStream()
     stream.pipe(res); 
-})
+}) 
 
 // app.post('/eats/products/upload', (req, res) => {
 //     // if (req.files === null) {
