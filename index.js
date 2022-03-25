@@ -84,6 +84,6 @@ app.use("/eats/products", express.static("./eats/products"));
 // });
 
 server.listen(process.env.port || 5000, ()=>{
-    console.log("Files server is running...");
+    console.log("Files server is running..."); 
 });
  
