@@ -27,19 +27,20 @@ function uploadFile(file) {
 }
 exports.uploadFile = uploadFile
 
+
 // downloads a file from s3
-async function getFileStream(fileKey) {
+function getFileStream(fileKey) {
     const downloadParams = {
         Key: fileKey,
         Bucket: bucketName
-    } 
+    }  
     
-    try{
-        // await s3.headObject(downloadParams).promise()
-        return s3.getObject(downloadParams).createReadStream()
-    }catch(err){
-        return false;
-    }
+    // try{
+    //     // await s3.headObject(downloadParams).promise()
+    //     return s3.getObject(downloadParams).createReadStream()
+    // }catch(err){
+    //     return false;
+    // }
     // const exists = await isObjectExists(downloadParams);
    
 }
