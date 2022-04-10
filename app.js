@@ -42,8 +42,7 @@ const upload = multer({
     })
 })
 
-
-// app.use(fileUpload());
+ 
 app.use(cors());
 const server = http.createServer(app);
 
@@ -67,6 +66,9 @@ app.post('/eats/products/upload', upload.single("image"), async (req, res) => {
     const fileName = req.file.key; 
     res.send({filePath: `https://files.theristow.com/eats/products/${fileName}`})
 });
+
+
+
 
 server.listen(process.env.port || 5000, ()=>{
     console.log("Files server is running..."); 
